@@ -1,23 +1,34 @@
-var books = new Set();
-books.add('The Hobbit')
-.add('Lord of the Rings')
-.add('Dune');
+// function* director() {
+//   yield "Three";
+//   yield "Two";
+//   yield "One";
+//   yield "Action";
+// }
 
-console.log(books);
-console.log(`How many books? ${books.size}`);
-console.log(`Has Dune? ${books.has('Dune')}`);
+// var action = director();
 
-var data = [4,2,4,4,2,5,1,6,7,5,6,8,2,7];
-var set = new Set(data);
-console.log('data.length', data.length);
-console.log('set.size', set.size);
+// console.log(action.next().value);
+// console.log(action.next().value);
+// console.log(action.next().value);
+// console.log(action.next().value);
+// console.log(action.next().value);
 
-var topics = new Map();
-topics.set('HTML', '/class/html');
-topics.set('CSS', '/class/CSS');
-topics.set('JavaScript', '/class/JavaScript');
-topics.set('Node', '/class/Node');
-
-for (let topic of topics.keys()) {
-  console.log(`${topic} is the course name`);
+function* eachItem(arr) {
+  for(var index=0; index < arr.length; index++) {
+    yield arr[index];
+  }
 }
+
+var letters = eachItem(["a", "b", "c", "d", "e", "f", "g"]);
+
+var abcs = setInterval(function(){
+  var letter = letters.next();
+  if(letter.done) {
+    clearInterval(abcs);
+    console.log("Now I know my ABC's")
+  } else {
+    console.log(letter.value);
+  }
+},
+
+500);
