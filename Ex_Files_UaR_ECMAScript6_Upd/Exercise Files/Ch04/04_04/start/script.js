@@ -1,23 +1,39 @@
-var books = new Set();
-books.add('The Hobbit')
-.add('Lord of the Rings')
-.add('Dune');
+// Old way: Create variable outside function to pass 'this' value
+var person = {
+  first: "Doug",
+  actions: ['bike', 'hike', 'ski', 'surf'],
+  printActions: function() {
+    var _this = this;
+    this.actions.forEach(function(action) {
+      var statement = `${_this.first} likes to ${action}`;
+      console.log(statement);
+    });
+  }
+};
 
-console.log(books);
-console.log(`How many books? ${books.size}`);
-console.log(`Has Dune? ${books.has('Dune')}`);
+// Using .bind
+// var person = {
+//   first: "Doug",
+//   actions: ['bike', 'hike', 'ski', 'surf'],
+//   printActions: function() {
+//     this.actions.forEach(function(action) {
+//       var statement = `${this.first} likes to ${action}`;
+//       console.log(statement);
+//     }.bind(this));
+//   }
+// };
 
-var data = [4,2,4,4,2,5,1,6,7,5,6,8,2,7];
-var set = new Set(data);
-console.log('data.length', data.length);
-console.log('set.size', set.size);
+// Using arrow function
+var person = {
+  first: "Doug",
+  actions: ['bike', 'hike', 'ski', 'surf'],
+  printActions() {
+    var _this = this;
+    this.actions.forEach((action) => {
+      var statement = `${this.first} likes to ${action}`;
+      console.log(statement);
+    });
+  }
+};
 
-var topics = new Map();
-topics.set('HTML', '/class/html');
-topics.set('CSS', '/class/CSS');
-topics.set('JavaScript', '/class/JavaScript');
-topics.set('Node', '/class/Node');
-
-for (let topic of topics.keys()) {
-  console.log(`${topic} is the course name`);
-}
+person.printActions();
