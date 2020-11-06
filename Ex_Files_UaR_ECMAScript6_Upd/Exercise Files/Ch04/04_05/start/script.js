@@ -1,23 +1,34 @@
-var books = new Set();
-books.add('The Hobbit')
-.add('Lord of the Rings')
-.add('Dune');
+// var [first,, third,,] = ["Spokane", "Boston", "Los Angeles", "Seattle", "Portland"];
+// console.log(first);
+// console.log(third);
 
-console.log(books);
-console.log(`How many books? ${books.size}`);
-console.log(`Has Dune? ${books.has('Dune')}`);
+// 
+// var sandwich = {
+//   title: "Reuben",
+//   price: 7,
+//   description: "Cleveland's favorite sandwich",
+//   ingredients: ['bread', 'corned beef', 'dressing', 'saurkraut', 'cheese']
+// };
 
-var data = [4,2,4,4,2,5,1,6,7,5,6,8,2,7];
-var set = new Set(data);
-console.log('data.length', data.length);
-console.log('set.size', set.size);
+// var {title, price, description, ingredients} = {
+//   title: "Reuben",
+//   price: 7,
+//   description: "Cleveland's favorite sandwich",
+//   ingredients: ['bread', 'corned beef', 'dressing', 'saurkraut', 'cheese']
+// };
 
-var topics = new Map();
-topics.set('HTML', '/class/html');
-topics.set('CSS', '/class/CSS');
-topics.set('JavaScript', '/class/JavaScript');
-topics.set('Node', '/class/Node');
+// console.log(title);
+// console.log(price);
 
-for (let topic of topics.keys()) {
-  console.log(`${topic} is the course name`);
+var vacation = {
+  destination: "Chile",
+  travelers: 2,
+  activity: "Skiing",
+  cost: 4000
+};
+
+function vacationMarketing({destination, activity}) {
+  return `Come to ${destination} and do some ${activity}`
 }
+
+console.log(vacationMarketing(vacation));
