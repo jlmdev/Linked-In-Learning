@@ -1,33 +1,23 @@
-var title = 'ES6';
-console.log(typeof title[Symbol.iterator]);
-
-var iterateIt = title[Symbol.iterator]();
-console.log(iterateIt.next());
-console.log(iterateIt.next());
-console.log(iterateIt.next());
-console.log(iterateIt.next());
-
-function tableReady(arr) {
-  var nextIndex = 0;
-  return {
-    next() {
-      if(nextIndex < arr.length) {
-        return {value: arr.shift(), done: false}
+const spacePeople = () => {
+  return new Promise((resolves, rejects) => {
+    const api = 'http://api.open-notify.org/astros.json';
+    const request = new XMLHttpRequest();
+    request.open('GET', api);
+    request.onload = () => {
+      if(request.status === 200) {
+        resolves(JSON.parse(request.response));
       } else {
-        return {done: true}
+          rejects(Error(request.statusText));
       }
-    }
-  }
-}
+    };
+    request.onerror = error => rejects(error);
+    request.send();
+  });
+};
 
-var waitingList = ['Sarah', "Heather", "Anna", "Megan"];
-var iterateList = tableReady(waitingList);
-
-console.log(`${iterateList.next().value}, your table is ready`);
-console.log(`${iterateList.next().value}, your table is ready`);
-console.log(`${iterateList.next().value}, your table is ready`);
-console.log(`${iterateList.next().value}, your table is ready`);
-console.log(`${iterateList.next().done}, your table is ready`);
-
-
-
+spacePeople().then(
+    spaceData => console.log(spaceData),
+    error => console.error(
+      new Error('Cannot load space people')
+    )
+);
