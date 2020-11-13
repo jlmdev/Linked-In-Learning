@@ -1,33 +1,20 @@
-var title = 'ES6';
-console.log(typeof title[Symbol.iterator]);
-
-var iterateIt = title[Symbol.iterator]();
-console.log(iterateIt.next());
-console.log(iterateIt.next());
-console.log(iterateIt.next());
-console.log(iterateIt.next());
-
-function tableReady(arr) {
-  var nextIndex = 0;
-  return {
-    next() {
-      if(nextIndex < arr.length) {
-        return {value: arr.shift(), done: false}
-      } else {
-        return {done: true}
-      }
+const delay = seconds => {
+  return new Promise((resolve, reject) => {
+    if(typeof seconds !== 'number') {
+      reject(new Error(`Argument seconds must be a number`));
     }
-  }
-}
+    setTimeout( () => resolve(`${seconds} second delay is up`), 
+    seconds * 1000)
+  });
+};
 
-var waitingList = ['Sarah', "Heather", "Anna", "Megan"];
-var iterateList = tableReady(waitingList);
-
-console.log(`${iterateList.next().value}, your table is ready`);
-console.log(`${iterateList.next().value}, your table is ready`);
-console.log(`${iterateList.next().value}, your table is ready`);
-console.log(`${iterateList.next().value}, your table is ready`);
-console.log(`${iterateList.next().done}, your table is ready`);
+console.log("zero seconds");
+delay("10 Minutes").then(message => message.toUpperCase())
+        .then(message => `${message}!!!!!!`)
+        .then(message => console.log(message));
+delay(2).then(message => message.toUpperCase())
+        .then(message => `${message}!!!!!!`)
+        .then(message => console.log(message));
 
 
 
