@@ -1,33 +1,13 @@
-var title = 'ES6';
-console.log(typeof title[Symbol.iterator]);
 
-var iterateIt = title[Symbol.iterator]();
-console.log(iterateIt.next());
-console.log(iterateIt.next());
-console.log(iterateIt.next());
-console.log(iterateIt.next());
+const getPeopleInSpace = () =>
+  fetch('http://api.open-notify.org/astros.json')
+    .then(response => response.json());
 
-function tableReady(arr) {
-  var nextIndex = 0;
-  return {
-    next() {
-      if(nextIndex < arr.length) {
-        return {value: arr.shift(), done: false}
-      } else {
-        return {done: true}
-      }
-    }
-  }
-}
+const spaceNames = () =>
+  getPeopleInSpace()
+    .then(json => json.people)
+    .then(people => people.map(person => person.name))
+    .then(names => names.join(', '));
 
-var waitingList = ['Sarah', "Heather", "Anna", "Megan"];
-var iterateList = tableReady(waitingList);
-
-console.log(`${iterateList.next().value}, your table is ready`);
-console.log(`${iterateList.next().value}, your table is ready`);
-console.log(`${iterateList.next().value}, your table is ready`);
-console.log(`${iterateList.next().value}, your table is ready`);
-console.log(`${iterateList.next().done}, your table is ready`);
-
-
-
+spaceNames()
+  .then(console.log);
