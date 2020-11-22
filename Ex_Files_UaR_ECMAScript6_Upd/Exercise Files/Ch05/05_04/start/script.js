@@ -1,33 +1,21 @@
-var title = 'ES6';
-console.log(typeof title[Symbol.iterator]);
+// Async
 
-var iterateIt = title[Symbol.iterator]();
-console.log(iterateIt.next());
-console.log(iterateIt.next());
-console.log(iterateIt.next());
-console.log(iterateIt.next());
+// Delay Function
+const delay = seconds => {
+  return new Promise(
+    resolve => setTimeout(resolve, seconds * 1000)
+  )
+};
 
-function tableReady(arr) {
-  var nextIndex = 0;
-  return {
-    next() {
-      if(nextIndex < arr.length) {
-        return {value: arr.shift(), done: false}
-      } else {
-        return {done: true}
-      }
-    }
-  }
-}
+const countToFive = async() => {
+  console.log('zero seconds');
+  await delay(1);
+  console.log('one second');
+  await delay(1);
+  console.log('two seconds');
+  await delay(3);
+  console.log('five seconds');
 
-var waitingList = ['Sarah', "Heather", "Anna", "Megan"];
-var iterateList = tableReady(waitingList);
+};
 
-console.log(`${iterateList.next().value}, your table is ready`);
-console.log(`${iterateList.next().value}, your table is ready`);
-console.log(`${iterateList.next().value}, your table is ready`);
-console.log(`${iterateList.next().value}, your table is ready`);
-console.log(`${iterateList.next().done}, your table is ready`);
-
-
-
+countToFive();
